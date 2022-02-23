@@ -5,8 +5,8 @@ import './DirectoryMenu.css';
 function DirectoryMenu() {
     return (
         <div className='directory-menu'>
-            {data.map(({ title, imageUrl, id, size }) => (
-                <MenuItem key={id} title={title} imageUrl={imageUrl} size={size}/>
+            {data.map(({ id, ...otherProps }) => (
+                <MenuItem key={id} {...otherProps}/>
             ))}
         </div>
     );

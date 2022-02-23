@@ -1,9 +1,23 @@
 import React from 'react';
 import './MenuItem.css';
+import {useNavigate, useLocation} from 'react-router-dom';
 
-function MenuItem({ title, imageUrl, size }) {
+function withRouter(Component){
+ const Wrapper=(props)=>{
+    const history=useNavigate();
+    const location=useLocation();
+    console.log(props);
+    return(
+        <Component history={history} location={location} {...props} />
+    ); 
+ }
+ return Wrapper;
+}
+
+function MenuItem({ title, imageUrl, size, history, linkUrl, location}) {
     return (
-        <div  className={`${size} menu-item`}>
+        <div  className={`${size} menu-item`} onClick={()=>{
+            history(`${location.pathname}${linkUrl}`)}}>
             <div className='image-container' style={{backgroundImage:`url(${imageUrl})`}}>
                 
             </div>
@@ -15,4 +29,4 @@ function MenuItem({ title, imageUrl, size }) {
     );
 }
 
-export default MenuItem;
+export default withRouter(MenuItem);
