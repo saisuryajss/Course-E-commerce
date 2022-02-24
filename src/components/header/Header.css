@@ -1,0 +1,21 @@
+.header ul{
+    list-style-type: none;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.header ul li{
+    cursor: pointer;
+}
+
+.header-img-holder{
+    width: 70%;
+    height: 50px;
+}
+
+.header-items{
+    width: 8%;
+    font-size: 1.3rem;
+}
