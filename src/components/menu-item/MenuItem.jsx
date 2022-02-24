@@ -6,7 +6,6 @@ function withRouter(Component){
  const Wrapper=(props)=>{
     const history=useNavigate();
     const location=useLocation();
-    console.log(props);
     return(
         <Component history={history} location={location} {...props} />
     ); 
