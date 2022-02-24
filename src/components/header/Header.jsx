@@ -9,9 +9,11 @@ function Header(){
        <div className='header'>
             <ul>
                <li className='header-img-holder' onClick={()=>navigate('/')}><Logo /></li> 
-               <li className='header-items' onClick={()=>navigate('/shop')}>SHOP</li>
-               <li className='header-items' onClick={()=>navigate('/contact')}>CONTACT</li>
-               <li className='header-items' onClick={()=>navigate('/contact')}>SIGN IN</li>
+               <div className='header-items'>
+               <li  onClick={()=>navigate('/shop')}>SHOP</li>
+               <li  onClick={()=>navigate('/contact')}>CONTACT</li>
+               <li  onClick={()=>navigate('/login')}>SIGN IN</li>
+               </div>
             </ul>
        </div>
    );

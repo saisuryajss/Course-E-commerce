@@ -4,6 +4,7 @@
     overflow: hidden;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .header ul li{
@@ -11,11 +12,14 @@
 }
 
 .header-img-holder{
-    width: 70%;
     height: 50px;
 }
 
 .header-items{
-    width: 8%;
+    width: 15%;
+    display: flex;
+    justify-content: space-between;
     font-size: 1.3rem;
+    margin-right: 4vw;
 }
+
