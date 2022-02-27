@@ -9,27 +9,27 @@ const data=[
         title:"Jackets",
         imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
         id: "2",
-        linkUrl:""
+        linkUrl:"jackets"
     },
     {
         title:"Sneakers",
         imageUrl: "https://i.ibb.co/0jqHpnp/sneaker.png",
         id: "3",
-        linkUrl:""
+        linkUrl:"sneakers"
     },
     {
         title:"Women",
         imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
         id: "4",
         size:"large",
-        linkUrl:""
+        linkUrl:"women"
     },
     {
         title:"Men",
         imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
         id: "5",
         size:"large",
-        linkUrl:""
+        linkUrl:"men"
     }
 ]
 

@@ -1,5 +1,5 @@
-.signin-component{
-    width:30vw; 
+.signup{
+    width: 30vw;
     display: flex;
     flex-direction: column;
 }

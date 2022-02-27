@@ -2,9 +2,20 @@ import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import './Header.css';
 import {ReactComponent as Logo} from '../../assets/crown.svg';
+import {auth} from '../../firebase/firebase';
 
-function Header(){
+function Header({currentUser}){
     const navigate=useNavigate();
+    const logOut=async(e)=>{
+        e.preventDefault();
+        await auth.signOut().then(function(){
+            console.log("successfully logged out");
+            navigate('/');
+        }).catch(function(error){
+            console.log(error);
+            console.log('an error occurred');
+        });
+    }
    return (
        <div className='header'>
             <ul>
@@ -12,7 +23,12 @@ function Header(){
                <div className='header-items'>
                <li  onClick={()=>navigate('/shop')}>SHOP</li>
                <li  onClick={()=>navigate('/contact')}>CONTACT</li>
-               <li  onClick={()=>navigate('/login')}>SIGN IN</li>
+               {  
+                    currentUser? 
+                    <li onClick={logOut} 
+                    >SIGN OUT </li> 
+                    : <li  onClick={()=>navigate('/login')}>SIGN IN</li>
+               }
                </div>
             </ul>
        </div>

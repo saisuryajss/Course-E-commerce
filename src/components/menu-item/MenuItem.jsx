@@ -4,19 +4,19 @@ import {useNavigate, useLocation} from 'react-router-dom';
 
 function withRouter(Component){
  const Wrapper=(props)=>{
-    const history=useNavigate();
+    const navigate=useNavigate();
     const location=useLocation();
     return(
-        <Component history={history} location={location} {...props} />
+        <Component navigate={navigate} location={location} {...props} />
     ); 
  }
  return Wrapper;
 }
 
-function MenuItem({ title, imageUrl, size, history, linkUrl, location}) {
+function MenuItem({ title, imageUrl, size, navigate,linkUrl, location}) {
     return (
         <div  className={`${size} menu-item`} onClick={()=>{
-            history(`${location.pathname}${linkUrl}`)}}>
+            navigate(`${location.pathname}${linkUrl}`)}}>
             <div className='image-container' style={{backgroundImage:`url(${imageUrl})`}}>
                 
             </div>
