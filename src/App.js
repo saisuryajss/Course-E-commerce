@@ -6,15 +6,16 @@ import ShopPage from './pages/shop/ShopPage';
 import Header from './components/header/Header';
 import SignInSignUp from './pages/signin-signup/SignInSignUp';
 import {useState,useEffect} from 'react';
-import {auth} from './firebase/firebase';
+import {onAuthChange} from './firebase/firebase';
 
 function App() {
-  let [user,setUser]=useState({});
+  let [user,setUser]=useState(null);
+
   useEffect(()=>{
-    auth.onAuthStateChanged(currUser=>{
-      setUser(currUser);
- });
-  },[user]);
+    const handleLogin=onAuthChange(setUser);
+    return ()=>handleLogin();
+  },[]);
+
   return (
     <div>
       <Header currentUser={user} />

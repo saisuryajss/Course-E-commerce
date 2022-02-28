@@ -6,9 +6,10 @@ import {auth} from '../../firebase/firebase';
 
 function Header({currentUser}){
     const navigate=useNavigate();
+    
     const logOut=async(e)=>{
         e.preventDefault();
-        await auth.signOut().then(function(){
+        await auth.signOut().then(()=>{
             console.log("successfully logged out");
             navigate('/');
         }).catch(function(error){
@@ -16,6 +17,7 @@ function Header({currentUser}){
             console.log('an error occurred');
         });
     }
+
    return (
        <div className='header'>
             <ul>
