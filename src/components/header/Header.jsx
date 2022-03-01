@@ -3,10 +3,12 @@ import {useNavigate} from 'react-router-dom';
 import './Header.css';
 import {ReactComponent as Logo} from '../../assets/crown.svg';
 import {auth} from '../../firebase/firebase';
+import {connect} from 'react-redux';
 
 function Header({currentUser}){
+    console.log(currentUser);
+    console.log('in header');
     const navigate=useNavigate();
-    
     const logOut=async(e)=>{
         e.preventDefault();
         await auth.signOut().then(()=>{
@@ -26,9 +28,8 @@ function Header({currentUser}){
                <li  onClick={()=>navigate('/shop')}>SHOP</li>
                <li  onClick={()=>navigate('/contact')}>CONTACT</li>
                {  
-                    currentUser? 
-                    <li onClick={logOut} 
-                    >SIGN OUT </li> 
+                    currentUser.user? 
+                    <li onClick={logOut} >SIGN OUT </li> 
                     : <li  onClick={()=>navigate('/login')}>SIGN IN</li>
                }
                </div>
@@ -37,4 +38,7 @@ function Header({currentUser}){
    );
 }
 
-export default Header;
+const mapStateToProps=(state)=>({
+   currentUser: state.user
+})
+export default connect(mapStateToProps)(Header);

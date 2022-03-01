@@ -5,20 +5,32 @@ import HomePage from './pages/homepage/HomePage';
 import ShopPage from './pages/shop/ShopPage';
 import Header from './components/header/Header';
 import SignInSignUp from './pages/signin-signup/SignInSignUp';
-import { useState, useEffect } from 'react';
-import { onAuthChange } from './firebase/firebase';
+import { useEffect } from 'react';
+import {connect} from 'react-redux';
+import {auth, createUserProfileDocument} from './firebase/firebase';
+import {setCurrentUser} from './redux/user-reducer/userActions';
 
-function App() {
-  let [user, setUser] = useState(null);
-
+function App(props) {
   useEffect(() => {
-    const handleLogin = onAuthChange(setUser);
-    return () => handleLogin();
-  }, []);
+      console.log('in authchange');
+      console.log(setCurrentUser);
+      auth.onAuthStateChanged(async userAuth=>{
+       if(userAuth){
+       const userRef=await createUserProfileDocument(userAuth);
+        userRef.onSnapshot((snapShot)=>{
+         props.setCurrentUser({
+           id:snapShot.id,   
+           ...snapShot.data()
+         });
+       });
+     }
+     props.setCurrentUser(userAuth);
+    });
+    });
 
   return (
     <div>
-      <Header currentUser={user} />
+      <Header />
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/shop' element={<ShopPage />} />
@@ -28,4 +40,8 @@ function App() {
   );
 }
 
-export default App;
+const mapDispatchToProps=dispatch=>({
+  setCurrentUser:user=>dispatch(setCurrentUser(user))
+});
+
+export default connect(null,mapDispatchToProps)(App);
