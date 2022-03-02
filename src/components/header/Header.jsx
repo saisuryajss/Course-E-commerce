@@ -7,7 +7,6 @@ import {connect} from 'react-redux';
 
 function Header({currentUser}){
     console.log(currentUser);
-    console.log('in header');
     const navigate=useNavigate();
     const logOut=async(e)=>{
         e.preventDefault();
@@ -28,7 +27,7 @@ function Header({currentUser}){
                <li  onClick={()=>navigate('/shop')}>SHOP</li>
                <li  onClick={()=>navigate('/contact')}>CONTACT</li>
                {  
-                    currentUser.user? 
+                    currentUser? 
                     <li onClick={logOut} >SIGN OUT </li> 
                     : <li  onClick={()=>navigate('/login')}>SIGN IN</li>
                }
@@ -39,6 +38,7 @@ function Header({currentUser}){
 }
 
 const mapStateToProps=(state)=>({
-   currentUser: state.user
-})
+    currentUser:state.user.user
+});
+
 export default connect(mapStateToProps)(Header);

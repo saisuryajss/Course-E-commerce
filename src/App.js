@@ -1,5 +1,5 @@
 
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/homepage/HomePage';
 import ShopPage from './pages/shop/ShopPage';
@@ -10,7 +10,7 @@ import {connect} from 'react-redux';
 import {auth, createUserProfileDocument} from './firebase/firebase';
 import {setCurrentUser} from './redux/user-reducer/userActions';
 
-function App(props) {
+function App({setCurrentUser,currentUser}) {
   useEffect(() => {
       console.log('in authchange');
       console.log(setCurrentUser);
@@ -18,15 +18,16 @@ function App(props) {
        if(userAuth){
        const userRef=await createUserProfileDocument(userAuth);
         userRef.onSnapshot((snapShot)=>{
-         props.setCurrentUser({
+         setCurrentUser({
            id:snapShot.id,   
            ...snapShot.data()
          });
        });
      }
-     props.setCurrentUser(userAuth);
+     else
+     setCurrentUser(userAuth);
     });
-    });
+    },[]);
 
   return (
     <div>
@@ -34,14 +35,21 @@ function App(props) {
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/shop' element={<ShopPage />} />
-        <Route path='/login' element={<SignInSignUp />} />
+        <Route path='/login' element={currentUser?<Navigate to='/' /> :<SignInSignUp />} /> 
       </Routes>
     </div>
   );
 }
 
+const mapStateToProps=({user})=>{
+  return {
+    currentUser:user.user
+  };
+}
+
+
 const mapDispatchToProps=dispatch=>({
   setCurrentUser:user=>dispatch(setCurrentUser(user))
 });
 
-export default connect(null,mapDispatchToProps)(App);
+export default connect(mapStateToProps,mapDispatchToProps)(App);
