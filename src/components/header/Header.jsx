@@ -4,6 +4,8 @@ import './Header.css';
 import {ReactComponent as Logo} from '../../assets/crown.svg';
 import {auth} from '../../firebase/firebase';
 import {connect} from 'react-redux';
+import CartIcon from '../cart-icon/CartIcon';
+import CartDropdown from '../cart-dropdown/CartDropdown';
 
 function Header({currentUser}){
     console.log(currentUser);
@@ -18,7 +20,6 @@ function Header({currentUser}){
             console.log('an error occurred');
         });
     }
-
    return (
        <div className='header'>
             <ul>
@@ -31,8 +32,10 @@ function Header({currentUser}){
                     <li onClick={logOut} >SIGN OUT </li> 
                     : <li  onClick={()=>navigate('/login')}>SIGN IN</li>
                }
+               <CartIcon />
                </div>
             </ul>
+            <CartDropdown />
        </div>
    );
 }
