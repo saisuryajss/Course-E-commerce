@@ -7,8 +7,7 @@ import {connect} from 'react-redux';
 import CartIcon from '../cart-icon/CartIcon';
 import CartDropdown from '../cart-dropdown/CartDropdown';
 
-function Header({currentUser}){
-    console.log(currentUser);
+function Header({user,hidden}){
     const navigate=useNavigate();
     const logOut=async(e)=>{
         e.preventDefault();
@@ -28,20 +27,24 @@ function Header({currentUser}){
                <li  onClick={()=>navigate('/shop')}>SHOP</li>
                <li  onClick={()=>navigate('/contact')}>CONTACT</li>
                {  
-                    currentUser? 
+                    user? 
                     <li onClick={logOut} >SIGN OUT </li> 
                     : <li  onClick={()=>navigate('/login')}>SIGN IN</li>
                }
                <CartIcon />
                </div>
             </ul>
-            <CartDropdown />
+            {
+              hidden?null:<CartDropdown />
+            }
+            
        </div>
    );
 }
 
-const mapStateToProps=(state)=>({
-    currentUser:state.user.user
+const mapStateToProps=({user:{user},cart:{hidden}})=>({
+    user,
+    hidden
 });
 
 export default connect(mapStateToProps)(Header);

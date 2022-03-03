@@ -1,4 +1,3 @@
-
 import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/homepage/HomePage';
@@ -10,10 +9,8 @@ import {connect} from 'react-redux';
 import {auth, createUserProfileDocument} from './firebase/firebase';
 import {setCurrentUser} from './redux/user-reducer/userActions';
 
-function App({setCurrentUser,currentUser}) {
+function App({user,setCurrentUser}) {
   useEffect(() => {
-      console.log('in authchange');
-      console.log(setCurrentUser);
       auth.onAuthStateChanged(async userAuth=>{
        if(userAuth){
        const userRef=await createUserProfileDocument(userAuth);
@@ -27,7 +24,7 @@ function App({setCurrentUser,currentUser}) {
      else
      setCurrentUser(userAuth);
     });
-    },[]);
+    },[setCurrentUser]);
 
   return (
     <div>
@@ -35,15 +32,15 @@ function App({setCurrentUser,currentUser}) {
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/shop' element={<ShopPage />} />
-        <Route path='/login' element={currentUser?<Navigate to='/' /> :<SignInSignUp />} /> 
+        <Route path='/login' element={user?<Navigate to='/' /> :<SignInSignUp />} /> 
       </Routes>
     </div>
   );
 }
 
-const mapStateToProps=({user})=>{
+const mapStateToProps=({user:{user}})=>{
   return {
-    currentUser:user.user
+    user
   };
 }
 
