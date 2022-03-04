@@ -5,21 +5,19 @@ import CustomButton from '../custom-button/CustomButton';
 function CollectionItem({ name, imageUrl, price }) {
     const handleOnMouseEnter = (event) => {
         const target = event.target.children[0];
-        if (target) {
+            if(target){
             target.style.display = 'flex';
-            target.style.opacity = '0.85'
-        }
+            target.style.opacity = '0.90';
+            }
     }
 
     const handleOnMouseLeave = (event) => {
         const target = event.target.children[0];
-        if (target) {
-            target.style.display = 'none';
-            target.opacity = '0.70';
-        }
+        if(target)
+        target.style.display = 'none';
     }
 
-    const handleCartMouseOver = (event) => {
+    const handleCartMouseEnter = (event) => {
         const target = event.target;
         if (target) {
             target.style.backgroundColor = 'black';
@@ -28,7 +26,7 @@ function CollectionItem({ name, imageUrl, price }) {
         }
     }
 
-    const handleCartMouseOut = (event) => {
+    const handleCartMouseLeave = (event) => {
         const target = event.target;
         if (target) {
             target.style.backgroundColor = 'white';
@@ -38,11 +36,11 @@ function CollectionItem({ name, imageUrl, price }) {
 
 
     return (
-        <div className='collection-item' onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseLeave}>
+        <div className='collection-item' >
             <div
                 className='collection-image'
-                style={{ backgroundImage: `url(${imageUrl})` }}>
-                <div className='add-to-cart' onMouseOver={handleCartMouseOver} onMouseOut={handleCartMouseOut}>
+                style={{ backgroundImage: `url(${imageUrl})` }} onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseLeave}>
+                <div className='add-to-cart' onMouseEnter={handleCartMouseEnter} onMouseLeave={handleCartMouseLeave}>
                     <CustomButton type='button' size='button-large' inverted={true} > ADD TO CART </CustomButton>
                 </div>
             </div>
