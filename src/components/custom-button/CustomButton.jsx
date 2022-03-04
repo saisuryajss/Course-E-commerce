@@ -1,9 +1,9 @@
 import React from 'react';
 import './CustomButton.css';
 
-function CustomButton({size,children,...otherButtonProps}){
+function CustomButton({size,children,inverted,...otherButtonProps}){
    return(
-           <input {...otherButtonProps} className={`${size}`}  value={children} readOnly/>
+           <input {...otherButtonProps} className={`${size} ${inverted?'inverted':''}`}  value={children} readOnly/>
    );
 }
 

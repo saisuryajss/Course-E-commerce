@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import './SignUp.css';
 import FormInput from '../form-input/FormInput';
 import CustomButton from '../custom-button/CustomButton';
@@ -11,10 +11,6 @@ function SignUp() {
         password: '',
         confirmPassword: ''
     });
-
-    // useEffect(()=>{
-    //    console.log(credentials);
-    // },[credentials]);
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -46,8 +42,8 @@ function SignUp() {
         catch (error) {
             console.log(error);
         }
-
     }
+    
     return (
         <div className='signup'>
             <h1>I don't have an account</h1>
@@ -57,7 +53,9 @@ function SignUp() {
                 <FormInput name='email' label='Email' type='email' value={credentials.email} handleChange={handleChange} />
                 <FormInput name='password' label='Password' type='password' value={credentials.password} handleChange={handleChange} />
                 <FormInput name='confirmPassword' label='Confirm password' type='password' value={credentials.confirmPassword} handleChange={handleChange} />
+                <div className='signup-options'>
                 <CustomButton type={'submit'} size={'button-medium'} > SIGN UP </CustomButton>
+                </div>
             </form>
         </div>
     );

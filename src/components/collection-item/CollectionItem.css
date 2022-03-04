@@ -1,4 +1,5 @@
 .collection-item{
+  position: relative;
     width:22%;
     height: 400px;
     display: flex;
@@ -12,6 +13,20 @@
    background-position: center;
    background-size: cover;
 }
+
+.add-to-cart{
+  position: absolute;
+  bottom:40px;
+  left:70px;
+  display: none;
+}
+
+
+.collection-image:hover{
+  opacity: 0.8;
+}
+
+
 .collection-footer {
     font-size: 1.5rem;
     width: 100%;

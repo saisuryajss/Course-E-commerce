@@ -42,8 +42,10 @@ function SignIn(){
            <form onSubmit={handleSubmit}>
               <FormInput name='email' label={'Email'} type='email' handleChange={handleChange} value={login.email} required />
               <FormInput name='password' label={'Password'} type='password' handleChange={handleChange} value={login.password} required />
+              <div className='signin-options'>
               <CustomButton type={'submit'} size={'button-medium'} > SIGN IN </CustomButton>
               <CustomButton type={'button'} onClick={signInWithGoogle} size={'button-large'} > SIGN IN WITH GOOGLE </CustomButton>
+              </div>
            </form>
        </div>
    );
