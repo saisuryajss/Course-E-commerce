@@ -6,7 +6,7 @@ import Header from './components/header/Header';
 import SignInSignUp from './pages/signin-signup/SignInSignUp';
 import {setCurrentUser} from './redux/user-reducer/userActions';
 import {selectCurrentUser} from './redux/user-reducer/userSelectors';
-import {Checkout} from './pages/checkout/Checkout';
+import Checkout from './pages/checkout/Checkout';
 
 import { useEffect } from 'react';
 import React from 'react';
