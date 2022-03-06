@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import { selectCartItems } from '../../redux/cart/cartSelectors';
 import { createStructuredSelector } from 'reselect';
 
-const CartDropdown = ({cartItems}) => {
+const CartDropdown = ({cartItems,navigate}) => {
     return (<div className='cart-dropdown'>
         <div className='cart-items'>
             {
@@ -16,7 +16,7 @@ const CartDropdown = ({cartItems}) => {
              }   
         </div>
         <div className='button-container'>
-            <CustomButton size='button-medium' type='button' > GO TO CHECKOUT </CustomButton>
+            <CustomButton size='button-medium' type='button' onClick={()=>navigate('/checkout')} > GO TO CHECKOUT </CustomButton>
         </div>
     </div>);
 }

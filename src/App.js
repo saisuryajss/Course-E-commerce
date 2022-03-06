@@ -4,12 +4,18 @@ import HomePage from './pages/homepage/HomePage';
 import ShopPage from './pages/shop/ShopPage';
 import Header from './components/header/Header';
 import SignInSignUp from './pages/signin-signup/SignInSignUp';
-import { useEffect } from 'react';
-import {connect} from 'react-redux';
-import {auth, createUserProfileDocument} from './firebase/firebase';
 import {setCurrentUser} from './redux/user-reducer/userActions';
-import {createStructuredSelector} from 'reselect';
 import {selectCurrentUser} from './redux/user-reducer/userSelectors';
+import {Checkout} from './pages/checkout/Checkout';
+
+import { useEffect } from 'react';
+import React from 'react';
+
+import {auth, createUserProfileDocument} from './firebase/firebase';
+
+import {connect} from 'react-redux';
+
+import {createStructuredSelector} from 'reselect';
 
 function App({user,setCurrentUser}) {
   useEffect(() => {
@@ -30,12 +36,13 @@ function App({user,setCurrentUser}) {
 
   return (
     <div>
-      <Header />
+     <Header />
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/shop' element={<ShopPage />} />
         <Route path='/login' element={user?<Navigate to='/' /> :<SignInSignUp />} /> 
-      </Routes>
+        <Route path='/checkout' element={<Checkout />} />
+        </Routes>
     </div>
   );
 }

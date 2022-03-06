@@ -38,7 +38,7 @@ function Header({user,hidden}){
                </div>
             </ul>
             {
-              hidden?null:<CartDropdown />
+              hidden?null:<CartDropdown navigate={navigate}/>
             }
             
        </div>
