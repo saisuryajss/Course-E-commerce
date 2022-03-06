@@ -10,7 +10,6 @@ function CollectionItem({ item, addItem }) {
         const target = event.target.children[0];
             if(target){
             target.style.display = 'flex';
-            target.style.opacity = '0.90';
             }
     }
 
