@@ -1,15 +1,13 @@
 .cart-icon{
     position: relative;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
     cursor: pointer;
+    justify-content: center;
 }
 
 .shopping-icon{
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
 }
 
 .item-count{
