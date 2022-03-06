@@ -18,7 +18,7 @@
     flex-direction: column;
     overflow-y: scroll;
     align-items: center;
-    justify-content: center;
+    margin: 20px 0px 20px 0px ;
 }
 
 .button-container{
