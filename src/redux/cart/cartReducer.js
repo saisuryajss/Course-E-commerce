@@ -1,33 +1,33 @@
 
 import { cartActionTypes } from "./cartActionTypes";
-import { addItemToCart,clearItemFromCart,decrementItemQuantity } from "./cartUtils";
+import { addItemToCart, clearItemFromCart, decrementItemQuantity } from "./cartUtils";
 
-const INITIAL_STATE={
-    hidden:true,
-    cartItems:[]
+const INITIAL_STATE = {
+    hidden: true,
+    cartItems: []
 }
 
-const cartReducer=(state=INITIAL_STATE,action)=>{
-    switch(action.type){
+const cartReducer = (state = INITIAL_STATE, action) => {
+    switch (action.type) {
         case cartActionTypes.TOGGLE_CART_HIDDEN:
             return {
                 ...state,
                 hidden: !state.hidden
             };
         case cartActionTypes.ADD_ITEM:
-            return{
+            return {
                 ...state,
-                cartItems:addItemToCart(state.cartItems,action.payload)
+                cartItems: addItemToCart(state.cartItems, action.payload)
             }
         case cartActionTypes.CLEAR_ITEM_FROM_CART:
-            return{
+            return {
                 ...state,
-                cartItems:clearItemFromCart(state.cartItems,action.payload)
+                cartItems: clearItemFromCart(state.cartItems, action.payload)
             }
         case cartActionTypes.DECREMENT_ITEM_QUANTITY:
-            return{
+            return {
                 ...state,
-                cartItems:decrementItemQuantity(state.cartItems,action.payload)
+                cartItems: decrementItemQuantity(state.cartItems, action.payload)
             }
         default:
             return state;
