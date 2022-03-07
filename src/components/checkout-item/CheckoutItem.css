@@ -25,3 +25,20 @@
 .checkout-field:last-child{
     width: 8%;
 }
+
+.remove-symbol{
+    cursor:pointer;
+}
+
+.checkout-field{
+    display: flex;
+    align-items: center;
+}
+
+.checkout-field .value{
+    padding: 0px 10px;
+}
+
+.checkout-field .arrow{
+    cursor: pointer;
+}
