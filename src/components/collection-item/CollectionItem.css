@@ -1,7 +1,7 @@
 .collection-item{
-  position: relative;
-    width:22%;
-    height: 400px;
+    position: relative;
+    width:20vw;
+    height: 450px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,7 +16,7 @@
 
 .add-to-cart{
   position: absolute;
-  bottom:60px;
+  bottom:100px;
   left:70px;
   display: none;
 }
