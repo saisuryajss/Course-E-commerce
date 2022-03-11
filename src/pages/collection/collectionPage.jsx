@@ -4,9 +4,14 @@ import { connect } from 'react-redux';
 import {selectCollection} from '../../redux/shop/shopSelector';
 import './collectionPage.css';
 
-function CollectionPage({collection}){
-    const params=useParams();
+function WithRouter(Component){
+    const Wrapper= props=><Component {...props} params={useParams()} />
+    return Wrapper;
+}
+
+function CollectionPage({collection,params}){
     console.log(collection);
+    console.log(params);
     return (
         <div>
             <h1>Collection Page </h1>
@@ -14,11 +19,8 @@ function CollectionPage({collection}){
     );
 }
 
-const mapStateToProps=(state)=>{
+const mapStateToProps=(state,ownProps)=>({
+    collection: selectCollection(ownProps.params.collectionId)(state)
+});
 
-return {
-    collection: selectCollection()(state)
-};
-}
-
-export default connect(mapStateToProps)(CollectionPage);
+export default WithRouter((connect(mapStateToProps)(CollectionPage)));

@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate} from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/homepage/HomePage';
 import ShopPage from './pages/shop/ShopPage';
@@ -30,7 +30,6 @@ function App({ user, setCurrentUser}) {
     });
     return unsubscribe;
   }, [setCurrentUser]);
-
   return (
     <>
       <Header />
