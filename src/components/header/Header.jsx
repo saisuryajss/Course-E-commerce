@@ -40,7 +40,6 @@ function Header({user,hidden}){
             {
               hidden?null:<CartDropdown navigate={navigate}/>
             }
-            
        </div>
    );
 }

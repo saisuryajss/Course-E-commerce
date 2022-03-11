@@ -7,19 +7,15 @@ import SignInSignUp from './pages/signin-signup/SignInSignUp';
 import { setCurrentUser } from './redux/user-reducer/userActions';
 import { selectCurrentUser } from './redux/user-reducer/userSelectors';
 import Checkout from './pages/checkout/Checkout';
-
 import { useEffect } from 'react';
 import React from 'react';
-
 import { auth, createUserProfileDocument } from './firebase/firebase';
-
 import { connect } from 'react-redux';
-
 import { createStructuredSelector } from 'reselect';
 
-function App({ user, setCurrentUser }) {
+function App({ user, setCurrentUser}) {
   useEffect(() => {
-    auth.onAuthStateChanged(async userAuth => {
+    const unsubscribe=auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
         userRef.onSnapshot((snapShot) => {
@@ -32,18 +28,19 @@ function App({ user, setCurrentUser }) {
       else
         setCurrentUser(userAuth);
     });
+    return unsubscribe;
   }, [setCurrentUser]);
 
   return (
-    <div>
+    <>
       <Header />
       <Routes>
         <Route path='/' element={<HomePage />} />
-        <Route path='/shop' element={<ShopPage />} />
+        <Route path='/shop/*' element={<ShopPage  />} />
         <Route path='/login' element={user ? <Navigate to='/' /> : <SignInSignUp />} />
         <Route path='/checkout' element={<Checkout />} />
       </Routes>
-    </div>
+    </>
   );
 }
 
@@ -52,8 +49,10 @@ const mapStateToProps = createStructuredSelector({
 })
 
 
+
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 });
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
