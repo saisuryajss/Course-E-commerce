@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate} from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/homepage/HomePage';
 import ShopPage from './pages/shop/ShopPage';
@@ -13,9 +13,9 @@ import { auth, createUserProfileDocument } from './firebase/firebase';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-function App({ user, setCurrentUser}) {
+function App({ user, setCurrentUser }) {
   useEffect(() => {
-    const unsubscribe=auth.onAuthStateChanged(async userAuth => {
+    const unsubscribe = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
         userRef.onSnapshot((snapShot) => {
@@ -35,7 +35,7 @@ function App({ user, setCurrentUser}) {
       <Header />
       <Routes>
         <Route path='/' element={<HomePage />} />
-        <Route path='/shop/*' element={<ShopPage  />} />
+        <Route path='/shop/*' element={<ShopPage />} />
         <Route path='/login' element={user ? <Navigate to='/' /> : <SignInSignUp />} />
         <Route path='/checkout' element={<Checkout />} />
       </Routes>
