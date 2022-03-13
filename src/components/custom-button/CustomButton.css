@@ -5,7 +5,7 @@
   background-color: black;
   border-width: 0px;
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 12px;
 }
 
 .button-medium:hover{
@@ -21,7 +21,7 @@
     background-color: rgb(32, 32, 248);
     border-width: 0px;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 12px;
 }
 
 .button-large:hover{
