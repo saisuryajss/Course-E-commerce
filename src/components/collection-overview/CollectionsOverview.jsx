@@ -4,12 +4,14 @@ import { connect } from 'react-redux';
 import {selectCollectionsForPreview} from '../../redux/shop/shopSelector';
 import { createStructuredSelector } from 'reselect';
 
-function CollectionsOverview({collectionData}){
+
+
+function CollectionsOverview({collectionData,navigate}){
     return (
         <div className='collection-overview'>
            {
                collectionData.map(({id,...otherCollectionProps})=>(
-                 <CollectionPreview key={id} {...otherCollectionProps} />
+                 <CollectionPreview key={id} {...otherCollectionProps} navigate={navigate}/>
                ))
            }
         </div>

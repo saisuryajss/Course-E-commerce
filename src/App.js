@@ -13,7 +13,7 @@ import { auth, createUserProfileDocument } from './firebase/firebase';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-function App({ user, setCurrentUser }) {
+function App({ user, setCurrentUser}) {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
@@ -28,6 +28,7 @@ function App({ user, setCurrentUser }) {
       else
         setCurrentUser(userAuth);
     });
+    
     return unsubscribe;
   }, [setCurrentUser]);
   return (

@@ -11,3 +11,7 @@
     justify-content: space-between;
     padding-bottom: 50px;
 }
+
+.collection-title{
+    cursor:pointer;
+}
