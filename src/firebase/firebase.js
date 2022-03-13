@@ -2,21 +2,21 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
 
-const aws = require('aws-sdk');
+// const aws = require('aws-sdk');
 
-let s3 = new aws.S3({
-  API_KEY: process.env.API_KEY,
-  MSG_ID: process.env.MSG_ID,
-  APP_ID: process.env.APP_ID
-});
+// let s3 = new aws.S3({
+//   API_KEY: process.env.API_KEY,
+//   MSG_ID: process.env.MSG_ID,
+//   APP_ID: process.env.APP_ID
+// });
 
 const config={
-    apiKey: s3.API_KEY,
+    apiKey: 'AIzaSyDHxv939i_4GFqJJU2XOkGtWzcY1BPsnP4',
     authDomain: "crown-db-bcee5.firebaseapp.com",
     projectId: "crown-db-bcee5",
     storageBucket: "crown-db-bcee5.appspot.com",
-    messagingSenderId: s3.MSG_ID,
-    appId: s3.APP_ID
+    messagingSenderId: '228355156696',
+    appId: '1:228355156696:web:394dfc3a5ad4bf3cf7c5ad'
   };
 
 firebase.initializeApp(config);
