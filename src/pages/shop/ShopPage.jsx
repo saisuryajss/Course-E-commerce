@@ -21,7 +21,7 @@ function ShopPage({updateCollections,navigate}) {
     let unsubscribeFromSnapshot=null;
     useEffect(()=>{
           const collectionRef=firestore.collection('collections');
-          unsubscribeFromSnapshot=collectionRef.onSnapshot(async (snapshot)=>{
+          unsubscribeFromSnapshot=collectionRef.get().then((snapshot)=>{
              const collectionMap= convertCollectionsSnapshotToMap(snapshot);
              updateCollections(collectionMap);
              setState(false);
