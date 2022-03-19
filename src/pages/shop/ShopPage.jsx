@@ -1,25 +1,19 @@
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import CollectionsOverview from '../../components/collection-overview/CollectionsOverview';
-import CollectionPage from '../collection/collectionPage';
+import CollectionPageContainer from '../collection/collectionPageContainer';
 import {connect} from 'react-redux';
-import {WithSpinner} from '../../components/with-spinner/withSpinner';
+import {CollectionsOverviewContainer} from '../../components/collection-overview/CollectionsContainer';
 import { useNavigate } from 'react-router-dom';
 import {fetchCollectionsStartAsync} from '../../redux/shop/ShopActions';
-import {createStructuredSelector} from 'reselect';
-import {selectIsCollectionFetching} from '../../redux/shop/shopSelector';
+import { WithSpinner } from '../../components/with-spinner/withSpinner';
 
 function WithRouter(Component) {
     const Wrapper = props => <Component {...props} navigate={useNavigate()} />
     return Wrapper;
 }
 
-const CollectionsOverviewWithSpinner=WithSpinner(CollectionsOverview);
-const CollectionsPageWithSpinner=WithSpinner(CollectionPage);
 
-function ShopPage(props) {
-    console.log(props);
-    const {isCollectionFetching,navigate,fetchCollectionsStartAsync}=props;
+function ShopPage({isCollectionFetching,navigate,fetchCollectionsStartAsync}) {
     useEffect(()=>{
         fetchCollectionsStartAsync();
     },[]);
@@ -27,19 +21,16 @@ function ShopPage(props) {
     return (
         <div className='shop-page'>
             <Routes>
-                <Route path={`/`} element={<CollectionsOverviewWithSpinner isLoading={isCollectionFetching} navigate={navigate} />} />
-                <Route path={`/:collectionId`} element={<CollectionsPageWithSpinner  isLoading={isCollectionFetching}  />}/>
+                <Route path={`/`} element={<CollectionsOverviewContainer navigate={navigate} />} />
+                <Route path={`/:collectionId`} element={<CollectionPageContainer  />}/>
             </Routes>
         </div>
     );
 }
 
-const mapStateToProps=createStructuredSelector({
-  isCollectionFetching:selectIsCollectionFetching
-});
 
 const mapDispatchToProps=(dispatch)=>({
     fetchCollectionsStartAsync:()=>dispatch(fetchCollectionsStartAsync())
 });
 
-export default WithRouter(connect(mapStateToProps,mapDispatchToProps)(ShopPage));
+export default WithRouter(connect(null,mapDispatchToProps)(ShopPage));
