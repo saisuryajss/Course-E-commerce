@@ -5,13 +5,13 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { WithSpinner } from '../../components/with-spinner/withSpinner';
 
-const mapStateToProps=createStructuredSelector({
-    isLoading:selectIsCollectionFetching
+const mapStateToProps = createStructuredSelector({
+    isLoading: selectIsCollectionFetching
 });
 
- const CollectionsPageContainer=compose(
- connect(mapStateToProps),
- WithSpinner
+const CollectionsPageContainer = compose(
+    connect(mapStateToProps),
+    WithSpinner
 )(CollectionPage);
 
 export default CollectionsPageContainer;
