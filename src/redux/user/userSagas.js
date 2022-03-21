@@ -6,13 +6,13 @@ import { googleSignInSuccess, googleSignInFailure } from "./userActions";
 export function* signInWithGoogle(){
    try{
      const {user}=yield auth.signInWithPopup(googleProvider);
-     console.log(user);
-     const userRef=yield call(createUserProfileDocument,user);
-     const userSnapShot=userRef.get();
-     console.log(userSnapShot);
+     const userRef= yield call(createUserProfileDocument,user);
+     const userSnapShot=yield userRef.get();
      yield put(googleSignInSuccess({id:userSnapShot.id,...userSnapShot.data()}));
+    
    }
    catch(error){
+     console.log(error);
      yield put(googleSignInFailure(error));
    }
 }
