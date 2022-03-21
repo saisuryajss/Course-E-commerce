@@ -4,8 +4,8 @@ import HomePage from './pages/homepage/HomePage';
 import ShopPage from './pages/shop/ShopPage';
 import Header from './components/header/Header';
 import SignInSignUp from './pages/signin-signup/SignInSignUp';
-import { setCurrentUser } from './redux/user-reducer/userActions';
-import { selectCurrentUser } from './redux/user-reducer/userSelectors';
+import { setCurrentUser } from './redux/user/userActions';
+import { selectCurrentUser } from './redux/user/userSelectors';
 import Checkout from './pages/checkout/Checkout';
 import { useEffect } from 'react';
 import React from 'react';
@@ -14,23 +14,23 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 function App({ user, setCurrentUser}) {
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-        userRef.onSnapshot((snapShot) => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data()
-          });
-        });
-      }
-      else
-        setCurrentUser(userAuth);
-    });
+  // useEffect(() => {
+  //   const unsubscribe = auth.onAuthStateChanged(async userAuth => {
+  //     if (userAuth) {
+  //       const userRef = await createUserProfileDocument(userAuth);
+  //       userRef.onSnapshot((snapShot) => {
+  //         setCurrentUser({
+  //           id: snapShot.id,
+  //           ...snapShot.data()
+  //         });
+  //       });
+  //     }
+  //     else
+  //       setCurrentUser(userAuth);
+  //   });
     
-    return unsubscribe;
-  }, [setCurrentUser]);
+  //   return unsubscribe;
+  // }, [setCurrentUser]);
   return (
     <>
       <Header />

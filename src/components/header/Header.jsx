@@ -5,7 +5,7 @@ import {auth} from '../../firebase/firebase';
 import {connect} from 'react-redux';
 import CartIcon from '../cart-icon/CartIcon';
 import CartDropdown from  '../cart-dropdown/CartDropdown';
-import {selectCurrentUser} from '../../redux/user-reducer/userSelectors';
+import {selectCurrentUser} from '../../redux/user/userSelectors';
 import {selectCartHidden} from '../../redux/cart/cartSelectors';
 import {createStructuredSelector} from 'reselect';
 import {HeaderContainer,HeaderItems,HeaderList,HeaderListItem} from './HeaderStyles';

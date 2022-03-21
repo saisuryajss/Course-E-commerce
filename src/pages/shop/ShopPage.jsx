@@ -4,14 +4,14 @@ import CollectionPageContainer from '../collection/collectionPageContainer';
 import { connect } from 'react-redux';
 import { CollectionsOverviewContainer } from '../../components/collection-overview/CollectionsContainer';
 import { useNavigate } from 'react-router-dom';
-import { fetchCollectionsStartAsync } from '../../redux/shop/ShopActions';
+import { fetchCollectionsStart } from '../../redux/shop/ShopActions';
 
 function WithRouter(Component) {
     const Wrapper = props => <Component {...props} navigate={useNavigate()} />
     return Wrapper;
 }
 
-function ShopPage({ isCollectionFetching, navigate, fetchCollectionsStartAsync }) {
+function ShopPage({ navigate, fetchCollectionsStartAsync }) {
     useEffect(() => {
         fetchCollectionsStartAsync();
     }, []);
@@ -27,8 +27,8 @@ function ShopPage({ isCollectionFetching, navigate, fetchCollectionsStartAsync }
 }
 
 
-const mapDispatchToProps = (dispatch) => ({
-    fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStartAsync())
+const mapDispatchToProps = dispatch => ({
+    fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStart())
 });
 
 export default WithRouter(connect(null, mapDispatchToProps)(ShopPage));

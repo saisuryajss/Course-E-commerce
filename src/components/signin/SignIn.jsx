@@ -1,10 +1,12 @@
 import {React, useState} from 'react';
+import { connect } from 'react-redux';
 import FormInput from '../form-input/FormInput';
 import './SignIn.css';
 import CustomButton from '../custom-button/CustomButton';
 import {signInWithGoogle,auth} from '../../firebase/firebase';
+import {googleSignInStart} from '../../redux/user/userActions';
 
-function SignIn(){
+function SignIn(props){
    const [login,setLogin] = useState({
        email:'',
        password:''
@@ -35,6 +37,8 @@ function SignIn(){
      });
   }
   
+  const {googleSignInStart}=props;
+
    return(
        <div className='signin-component'>
            <h1>I already have an account</h1>
@@ -44,7 +48,7 @@ function SignIn(){
               <FormInput name='password' label={'Password'} type='password' handleChange={handleChange} value={login.password} required />
               <div className='signin-options'>
               <CustomButton type={'submit'} size={'button-medium'} > SIGN IN </CustomButton>
-              <CustomButton type={'button'} onClick={signInWithGoogle} size={'button-large'} > SIGN IN WITH GOOGLE </CustomButton>
+              <CustomButton type={'button'} onClick={googleSignInStart} size={'button-large'} > SIGN IN WITH GOOGLE </CustomButton>
               </div>
            </form>
        </div>
@@ -52,4 +56,8 @@ function SignIn(){
   
 }
 
-export default SignIn;
+const mapDispatchToProps=dispatch=>({
+    googleSignInStart:()=>dispatch(googleSignInStart())
+});
+
+export default connect(null,mapDispatchToProps)(SignIn);
