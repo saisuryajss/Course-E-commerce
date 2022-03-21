@@ -4,14 +4,13 @@ import HomePage from './pages/homepage/HomePage';
 import ShopPage from './pages/shop/ShopPage';
 import Header from './components/header/Header';
 import SignInSignUp from './pages/signin-signup/SignInSignUp';
-import { setCurrentUser } from './redux/user/userActions';
 import { selectCurrentUser } from './redux/user/userSelectors';
 import Checkout from './pages/checkout/Checkout';
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-function App({ user}) {
+function App({ user }) {
 
   return (
     <>
@@ -26,15 +25,9 @@ function App({ user}) {
   );
 }
 
+
 const mapStateToProps = createStructuredSelector({
   user: selectCurrentUser
 })
 
-
-
-const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
-});
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);
