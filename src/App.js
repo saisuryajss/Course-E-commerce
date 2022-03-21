@@ -7,30 +7,12 @@ import SignInSignUp from './pages/signin-signup/SignInSignUp';
 import { setCurrentUser } from './redux/user/userActions';
 import { selectCurrentUser } from './redux/user/userSelectors';
 import Checkout from './pages/checkout/Checkout';
-import { useEffect } from 'react';
 import React from 'react';
-import { auth, createUserProfileDocument } from './firebase/firebase';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-function App({ user, setCurrentUser}) {
-  // useEffect(() => {
-  //   const unsubscribe = auth.onAuthStateChanged(async userAuth => {
-  //     if (userAuth) {
-  //       const userRef = await createUserProfileDocument(userAuth);
-  //       userRef.onSnapshot((snapShot) => {
-  //         setCurrentUser({
-  //           id: snapShot.id,
-  //           ...snapShot.data()
-  //         });
-  //       });
-  //     }
-  //     else
-  //       setCurrentUser(userAuth);
-  //   });
-    
-  //   return unsubscribe;
-  // }, [setCurrentUser]);
+function App({ user}) {
+
   return (
     <>
       <Header />
