@@ -9,19 +9,20 @@ import {selectCurrentUser} from '../../redux/user/userSelectors';
 import {selectCartHidden} from '../../redux/cart/cartSelectors';
 import {createStructuredSelector} from 'reselect';
 import {HeaderContainer,HeaderItems,HeaderList,HeaderListItem} from './HeaderStyles';
+import {signOutStart} from '../../redux/user/userActions';
 
-function Header({user,hidden}){
+function Header({user,hidden,signOutStart}){
     const navigate=useNavigate();
-    const logOut=async(e)=>{
-        e.preventDefault();
-        await auth.signOut().then(()=>{
-            console.log("successfully logged out");
-            navigate('/');
-        }).catch(function(error){
-            console.log(error);
-            console.log('an error occurred');
-        });
-    }
+    // const logOut=async(e)=>{
+    //     e.preventDefault();
+    //     await auth.signOut().then(()=>{
+    //         console.log("successfully logged out");
+    //         navigate('/');
+    //     }).catch(function(error){
+    //         console.log(error);
+    //         console.log('an error occurred');
+    //     });
+    // }
    return (
        <HeaderContainer>
             <HeaderList>
@@ -31,7 +32,7 @@ function Header({user,hidden}){
                <HeaderListItem  onClick={()=>navigate('/contact')}>CONTACT</HeaderListItem>
                {  
                     user? 
-                    <HeaderListItem onClick={logOut} >SIGN OUT </HeaderListItem> 
+                    <HeaderListItem onClick={signOutStart} >SIGN OUT </HeaderListItem> 
                     : <HeaderListItem  onClick={()=>navigate('/login')}>SIGN IN</HeaderListItem>
                }
                <CartIcon />
@@ -49,4 +50,8 @@ const mapStateToProps=createStructuredSelector({
     hidden:selectCartHidden
 });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps=dispatch=>({
+    signOutStart:()=>dispatch(signOutStart())
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(Header);

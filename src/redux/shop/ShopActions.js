@@ -5,7 +5,7 @@ export const fetchCollectionsStart = () => ({
 });
 
 export const fetchCollectionsSuccess = collectionsMap => ({
-    type: shopActionTypes.FECTH_COLLECTIONS_SUCCESS,
+    type: shopActionTypes.FETCH_COLLECTIONS_SUCCESS,
     payload: collectionsMap
 });
 
@@ -13,5 +13,3 @@ export const fetchCollectionsFailure = errorMessage => ({
     type: shopActionTypes.FETCH_COLLECTIONS_FAILURE,
     payload: errorMessage
 });
-
-

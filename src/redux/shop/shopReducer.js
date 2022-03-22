@@ -13,7 +13,7 @@ export const shopReducer = (state = INITIAL_STATE, action) => {
         ...state,
         isFetching:true
       };
-    case shopActionTypes.FECTH_COLLECTIONS_SUCCESS:
+    case shopActionTypes.FETCH_COLLECTIONS_SUCCESS:
       return{
         ...state,
         isFetching:false,
