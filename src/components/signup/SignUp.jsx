@@ -1,10 +1,11 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import './SignUp.css';
 import FormInput from '../form-input/FormInput';
 import CustomButton from '../custom-button/CustomButton';
-import { auth, createUserProfileDocument } from '../../firebase/firebase';
+import { connect } from 'react-redux';
+import { signUpStart } from '../../redux/user/userActions';
 
-function SignUp() {
+function SignUp({ signUpStart }) {
     let [credentials, SetCredentials] = useState({
         displayName: '',
         email: '',
@@ -22,16 +23,10 @@ function SignUp() {
         });
     }
 
-    const handleSubmit=async(event)=>{
-        event.preventDefault()
-        const { displayName, email, password, confirmPassword } = credentials;
-        if (password !== confirmPassword) {
-            alert("Passwords don't match");
-            return;
-        }
+    const handleSubmit = async (event) => {
+        event.preventDefault();
         try {
-            const { user } = await  auth.createUserWithEmailAndPassword(email, password);
-            await createUserProfileDocument(user, { displayName });
+            await signUpStart();
             SetCredentials({
                 displayName: '',
                 email: '',
@@ -43,7 +38,7 @@ function SignUp() {
             console.log(error);
         }
     }
-    
+
     return (
         <div className='signup'>
             <h1>I don't have an account</h1>
@@ -54,11 +49,15 @@ function SignUp() {
                 <FormInput name='password' label='Password' type='password' value={credentials.password} handleChange={handleChange} />
                 <FormInput name='confirmPassword' label='Confirm password' type='password' value={credentials.confirmPassword} handleChange={handleChange} />
                 <div className='signup-options'>
-                <CustomButton type={'submit'} size={'button-medium'} > SIGN UP </CustomButton>
+                    <CustomButton type={'submit'} size={'button-medium'} > SIGN UP </CustomButton>
                 </div>
             </form>
         </div>
     );
 }
 
-export default SignUp;
+const mapDispatchToProps = (dispatch) => ({
+    signUpStart: () => dispatch(signUpStart())
+})
+
+export default connect(null, mapDispatchToProps)(SignUp);
