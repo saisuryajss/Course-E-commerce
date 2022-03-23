@@ -3,9 +3,9 @@ import userActionTypes from "./userActionTypes";
 import { auth, googleProvider, createUserProfileDocument, getCurrentUser } from '../../firebase/firebase';
 import { signInFailure, signInSuccess, signOutFailure, signOutSuccess, signUpFailure, signUpSuccess } from "./userActions";
 
-export function* getSnapShotFromUserAuth(userAuth) {
+export function* getSnapShotFromUserAuth(userAuth, additionalData) {
   try {
-    const userRef = yield call(createUserProfileDocument, userAuth);
+    const userRef = yield call(createUserProfileDocument, userAuth, additionalData);
     const userSnapShot = yield userRef.get();
     yield put(
       signInSuccess({ id: userSnapShot.id, ...userSnapShot.data() })
@@ -61,19 +61,18 @@ export function* signOut() {
   }
 }
 
-export function* signUp(userCredentials) {
+export function* signUp({ payload: { email, password, displayName } }) {
   try {
-    const { displayName, email, password, confirmPassword } = userCredentials;
-    if (password !== confirmPassword) {
-      alert("Passwords don't match");
-      return;
-    }
     const { user } = yield auth.createUserWithEmailAndPassword(email, password);
-    yield getSnapShotFromUserAuth(user);
+    yield put(signInSuccess({ user, additionalData: { displayName } }))
   }
   catch (error) {
     yield put(signUpFailure(error));
   }
+}
+
+export function* signInAfterSignUp({ payload: { user, additionalData } }) {
+  yield getSnapShotFromUserAuth(user, additionalData);
 }
 
 export function* onGoogleSignInStart() {
@@ -93,7 +92,11 @@ export function* onSignOutStart() {
 }
 
 export function* onSignUpStart() {
-  yield takeLatest(userActionTypes.SIGN_UP_START,);
+  yield takeLatest(userActionTypes.SIGN_UP_START, signUp);
+}
+
+export function* onSignUpSuccess() {
+  yield takeLatest(userActionTypes.SIGN_UP_SUCCESS, signInAfterSignUp);
 }
 
 export function* userSagas() {
@@ -102,5 +105,6 @@ export function* userSagas() {
     call(onEmailSignInStart),
     call(onCheckUserSession),
     call(onSignOutStart),
-    call(onSignUpStart)]);
+    call(onSignUpStart),
+    call(onSignUpSuccess)]);
 }

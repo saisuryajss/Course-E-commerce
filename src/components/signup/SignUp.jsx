@@ -25,18 +25,11 @@ function SignUp({ signUpStart }) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        try {
-            await signUpStart();
-            SetCredentials({
-                displayName: '',
-                email: '',
-                password: '',
-                confirmPassword: ''
-            });
+        if (password !== confirmPassword) {
+            alert("Passwords don't match");
+            return;
         }
-        catch (error) {
-            console.log(error);
-        }
+        await signUpStart();
     }
 
     return (
