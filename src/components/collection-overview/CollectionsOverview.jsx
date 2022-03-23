@@ -3,13 +3,13 @@ import CollectionPreview from '../collection-preview/CollectionPreview';
 import { useSelector } from 'react-redux';
 import {selectCollectionsForPreview} from '../../redux/shop/shopSelector';
 
-function CollectionsOverview({navigate}){
+function CollectionsOverview(){
     const collectionData=useSelector(selectCollectionsForPreview);
     return (
         <div className='collection-overview'>
            {
                collectionData.map(({id,...otherCollectionProps})=>(
-                 <CollectionPreview key={id} {...otherCollectionProps} navigate={navigate}/>
+                 <CollectionPreview key={id} {...otherCollectionProps} />
                ))
            }
         </div>

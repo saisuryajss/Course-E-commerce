@@ -1,9 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import CollectionItem from '../collection-item/CollectionItem';
 import './CollectionPreview.css';
 
 
-function CollectionPreview({title,items,routeName,navigate}){
+function CollectionPreview({title,items,routeName}){
+    const navigate=useNavigate();
     return(
         <div className='collection-preview'>
             <h1 className='collection-title' onClick={()=>navigate(`/shop/${routeName}`)}> {title.toUpperCase()} </h1>
