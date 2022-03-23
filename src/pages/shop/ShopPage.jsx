@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import CollectionPageContainer from '../collection/collectionPageContainer';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { CollectionsOverviewContainer } from '../../components/collection-overview/CollectionsContainer';
 import { useNavigate } from 'react-router-dom';
 import { fetchCollectionsStart } from '../../redux/shop/ShopActions';
@@ -11,10 +11,11 @@ function WithRouter(Component) {
     return Wrapper;
 }
 
-function ShopPage({ navigate, fetchCollectionsStartAsync }) {
+function ShopPage({ navigate}) {
+    const dispatch=useDispatch();
     useEffect(() => {
-        fetchCollectionsStartAsync();
-    }, [fetchCollectionsStartAsync]);
+        dispatch(fetchCollectionsStart());
+    }, [dispatch]);
 
     return (
         <div className='shop-page'>
@@ -26,9 +27,4 @@ function ShopPage({ navigate, fetchCollectionsStartAsync }) {
     );
 }
 
-
-const mapDispatchToProps = dispatch => ({
-    fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStart())
-});
-
-export default WithRouter(connect(null, mapDispatchToProps)(ShopPage));
+export default WithRouter(ShopPage);

@@ -1,28 +1,20 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import {ReactComponent as Logo} from '../../assets/crown.svg';
-import {auth} from '../../firebase/firebase';
-import {connect} from 'react-redux';
+import {useDispatch,useSelector} from 'react-redux';
 import CartIcon from '../cart-icon/CartIcon';
 import CartDropdown from  '../cart-dropdown/CartDropdown';
 import {selectCurrentUser} from '../../redux/user/userSelectors';
 import {selectCartHidden} from '../../redux/cart/cartSelectors';
-import {createStructuredSelector} from 'reselect';
 import {HeaderContainer,HeaderItems,HeaderList,HeaderListItem} from './HeaderStyles';
 import {signOutStart} from '../../redux/user/userActions';
 
-function Header({user,hidden,signOutStart}){
+function Header(){
+    const currentUser=useSelector(selectCurrentUser);
+    const hidden=useSelector(selectCartHidden);
+    const dispatch=useDispatch();
     const navigate=useNavigate();
-    // const logOut=async(e)=>{
-    //     e.preventDefault();
-    //     await auth.signOut().then(()=>{
-    //         console.log("successfully logged out");
-    //         navigate('/');
-    //     }).catch(function(error){
-    //         console.log(error);
-    //         console.log('an error occurred');
-    //     });
-    // }
+    
    return (
        <HeaderContainer>
             <HeaderList>
@@ -31,8 +23,8 @@ function Header({user,hidden,signOutStart}){
                <HeaderListItem  onClick={()=>navigate('/shop')}>SHOP</HeaderListItem>
                <HeaderListItem  onClick={()=>navigate('/contact')}>CONTACT</HeaderListItem>
                {  
-                    user? 
-                    <HeaderListItem onClick={signOutStart} >SIGN OUT </HeaderListItem> 
+                    currentUser? 
+                    <HeaderListItem onClick={()=>dispatch(signOutStart())} >SIGN OUT </HeaderListItem> 
                     : <HeaderListItem  onClick={()=>navigate('/login')}>SIGN IN</HeaderListItem>
                }
                <CartIcon />
@@ -45,13 +37,4 @@ function Header({user,hidden,signOutStart}){
    );
 }
 
-const mapStateToProps=createStructuredSelector({
-    user:selectCurrentUser,
-    hidden:selectCartHidden
-});
-
-const mapDispatchToProps=dispatch=>({
-    signOutStart:()=>dispatch(signOutStart())
-})
-
-export default connect(mapStateToProps,mapDispatchToProps)(Header);
+export default Header;

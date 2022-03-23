@@ -1,10 +1,11 @@
 import React from 'react';
 import './CollectionItem.css';
 import CustomButton from '../custom-button/CustomButton';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addItem } from '../../redux/cart/cartActions';
 
-function CollectionItem({ item, addItem }) {
+function CollectionItem({ item }) {
+    const dispatch=useDispatch();
     const { name, imageUrl, price } = item;
     const handleOnMouseEnter = (event) => {
         const target = event.target.children[0];
@@ -43,7 +44,7 @@ function CollectionItem({ item, addItem }) {
                 className='collection-image'
                 style={{ backgroundImage: `url(${imageUrl})` }} onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseLeave}>
                 <div className='add-to-cart' onMouseEnter={handleCartMouseEnter} onMouseLeave={handleCartMouseLeave}>
-                    <CustomButton type='button' size='button-large' inverted={true} onClick={() => addItem(item)} > ADD TO CART </CustomButton>
+                    <CustomButton type='button' size='button-large' inverted={true} onClick={() => dispatch(addItem(item))} > ADD TO CART </CustomButton>
                 </div>
             </div>
             <div className='collection-footer'>
@@ -54,8 +55,4 @@ function CollectionItem({ item, addItem }) {
     );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    addItem: item => dispatch(addItem(item))
-});
-
-export default connect(null, mapDispatchToProps)(CollectionItem);
+export default CollectionItem;
