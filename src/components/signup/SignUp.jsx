@@ -13,6 +13,8 @@ function SignUp({ signUpStart }) {
         confirmPassword: ''
     });
 
+    const {displayName,email,password,confirmPassword}=credentials;
+
     function handleChange(event) {
         const { name, value } = event.target;
         SetCredentials((prevValues) => {
@@ -29,7 +31,7 @@ function SignUp({ signUpStart }) {
             alert("Passwords don't match");
             return;
         }
-        await signUpStart();
+        await signUpStart({email,password,displayName });
     }
 
     return (
@@ -37,10 +39,10 @@ function SignUp({ signUpStart }) {
             <h1>I don't have an account</h1>
             <h3>Sign up with your email and password.</h3>
             <form onSubmit={handleSubmit}>
-                <FormInput name='displayName' label='Display Name' type='text' value={credentials.displayName} handleChange={handleChange} />
-                <FormInput name='email' label='Email' type='email' value={credentials.email} handleChange={handleChange} />
-                <FormInput name='password' label='Password' type='password' value={credentials.password} handleChange={handleChange} />
-                <FormInput name='confirmPassword' label='Confirm password' type='password' value={credentials.confirmPassword} handleChange={handleChange} />
+                <FormInput name='displayName' label='Display Name' type='text' value={displayName} handleChange={handleChange} />
+                <FormInput name='email' label='Email' type='email' value={email} handleChange={handleChange} />
+                <FormInput name='password' label='Password' type='password' value={password} handleChange={handleChange} />
+                <FormInput name='confirmPassword' label='Confirm password' type='password' value={confirmPassword} handleChange={handleChange} />
                 <div className='signup-options'>
                     <CustomButton type={'submit'} size={'button-medium'} > SIGN UP </CustomButton>
                 </div>

@@ -11,11 +11,11 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import {checkUserSession} from './redux/user/userActions';
 
-function App({ user,checkUserSession }) {
+function App({ CurrentUser,checkUserSession }) {
 
   useEffect(()=>{
      checkUserSession();
-  },[]);
+  },[checkUserSession]);
 
   return (
     <>
@@ -23,7 +23,7 @@ function App({ user,checkUserSession }) {
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/shop/*' element={<ShopPage />} />
-        <Route path='/login' element={user ? <Navigate to='/' /> : <SignInSignUp />} />
+        <Route path='/login' element={CurrentUser ? <Navigate to='/' /> : <SignInSignUp />} />
         <Route path='/checkout' element={<Checkout />} />
       </Routes>
     </>
@@ -32,7 +32,7 @@ function App({ user,checkUserSession }) {
 
 
 const mapStateToProps = createStructuredSelector({
-  user: selectCurrentUser
+  currentUser: selectCurrentUser
 })
 
 const mapDispatchToProps=dispatch=>({

@@ -14,7 +14,7 @@ function WithRouter(Component) {
 function ShopPage({ navigate, fetchCollectionsStartAsync }) {
     useEffect(() => {
         fetchCollectionsStartAsync();
-    }, []);
+    }, [fetchCollectionsStartAsync]);
 
     return (
         <div className='shop-page'>
