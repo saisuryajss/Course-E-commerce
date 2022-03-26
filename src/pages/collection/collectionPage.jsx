@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector} from 'react-redux';
 import { selectCollection } from '../../redux/shop/shopSelector';
 import './collectionPage.css';
 import CollectionItem from '../../components/collection-item/CollectionItem';
