@@ -6,8 +6,6 @@ import './DirectoryMenu.css';
 
 function DirectoryMenu() {
     const data=useSelector(selectDirectoryData);
-    console.log(data);
-
     useEffect(()=>{
         
     },[data]);
