@@ -65,5 +65,5 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ## Links 
-- [Deployment](https://ecommerce-livetemp.herokuapp.com/)
+- [Deployment](https://e-commerce-live.netlify.app/)
   
