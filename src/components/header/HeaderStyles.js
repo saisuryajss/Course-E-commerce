@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export const HeaderContainer=styled.div`
+export const HeaderContainer = styled.div`
 
 `;
 
-export const HeaderList=styled.ul`
+export const HeaderList = styled.ul`
 list-style-type: none;
 width: 100%;
 height: 60px;
@@ -15,12 +15,12 @@ justify-content: space-between;
 `;
 
 
-export const HeaderListItem=styled.li`
+export const HeaderListItem = styled.li`
 cursor: pointer;
 `;
 
-export const HeaderItems=styled.div`
-    width: 20vw;
+export const HeaderItems = styled.div`
+    width: 15vw;
     height: 100%;
     display: flex;
     align-items: center;

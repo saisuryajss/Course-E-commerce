@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import './Checkout.css';
 import { selectCartItems, selectCartTotal } from '../../redux/cart/cartSelectors';
 import CheckoutItem from '../../components/checkout-item/CheckoutItem';
-import StripeCheckoutButton from '../../components/stripCheckoutButton/StripeCheckout';
+import StripeCheckoutButton from '../../components/stripeCheckoutButton/StripeCheckout';
 
 
 function Checkout() {

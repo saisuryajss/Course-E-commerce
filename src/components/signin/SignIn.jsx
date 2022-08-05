@@ -17,7 +17,11 @@ function SignIn(){
 
   async function handleSubmit(event){
     event.preventDefault();
-    dispatch(emailSignInStart(email,password));
+    const payload= {
+        email,
+        password
+    }
+    dispatch(emailSignInStart(payload));
   }
 
   function handleChange(event){

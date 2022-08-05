@@ -21,7 +21,6 @@ function Header(){
                <HeaderListItem  onClick={()=>navigate('/')}><Logo /></HeaderListItem> 
                <HeaderItems>
                <HeaderListItem  onClick={()=>navigate('/shop')}>SHOP</HeaderListItem>
-               <HeaderListItem  onClick={()=>navigate('/contact')}>CONTACT</HeaderListItem>
                {  
                     currentUser? 
                     <HeaderListItem onClick={()=>dispatch(signOutStart())} >SIGN OUT </HeaderListItem> 
