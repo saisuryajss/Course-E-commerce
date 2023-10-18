@@ -1,7 +1,7 @@
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
-import 'firebase/compat/auth';
-
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
+import "firebase/compat/auth";
+import { getFirestore } from "firebase/firestore";
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -9,14 +9,14 @@ const config = {
   projectId: process.env.REACT_APP_PROJECT_ID,
   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_SENDER_ID,
-  appId: process.env.REACT_APP_APP_ID
+  appId: process.env.REACT_APP_APP_ID,
 };
 
-firebase.initializeApp(config);
+const app = firebase.initializeApp(config);
+export const db = getFirestore(app);
 
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
-googleProvider.setCustomParameters({ prompt: 'select_account' });
-
+googleProvider.setCustomParameters({ prompt: "select_account" });
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
@@ -32,54 +32,59 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
     try {
-      await userRef.set({
-        displayName,
-        email,
-        createdAt,
-        ...additionalData
-      }, () => {
-        console.log('user profile created successfully');
-      });
-    }
-    catch (error) {
-      console.log('error creating user profile ' + error.message);
+      await userRef.set(
+        {
+          displayName,
+          email,
+          createdAt,
+          ...additionalData,
+        },
+        () => {
+          console.log("user profile created successfully");
+        }
+      );
+    } catch (error) {
+      console.log("error creating user profile " + error.message);
     }
   }
   return userRef;
-}
+};
 
-export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
   const collectionRef = firestore.collection(collectionKey);
   const batch = firestore.batch();
-  objectsToAdd.forEach(obj => {
+  objectsToAdd.forEach((obj) => {
     const documentRef = collectionRef.doc();
     batch.set(documentRef, obj);
   });
 
   return await batch.commit();
-}
+};
 
-export const convertCollectionsSnapshotToMap = collections => {
-  const transformedCollections = collections.docs.map(doc => {
+export const convertCollectionsSnapshotToMap = (collections) => {
+  const transformedCollections = collections.docs.map((doc) => {
     const { title, items } = doc.data();
     return {
       routeName: encodeURI(title.toLowerCase()),
       id: doc.id,
       title,
-      items
+      items,
     };
   });
   return transformedCollections.reduce((accumulator, collection) => {
-    accumulator[collection.title.toLowerCase()] = collection
+    accumulator[collection.title.toLowerCase()] = collection;
     return accumulator;
   }, {});
-}
+};
 
 export const getCurrentUser = () => {
   return new Promise((resolve, reject) => {
-    const unsubscribe = auth.onAuthStateChanged(userAuth => {
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
       unsubscribe();
       resolve(userAuth);
-    }, reject)
+    }, reject);
   });
-}
+};
