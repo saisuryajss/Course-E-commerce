@@ -31,7 +31,7 @@ function CollectionPage() {
       <Grid
         container
         gap={2}
-        sx={{ width: "100%", justifyContent: "space-between" }}
+        sx={{ width: "100%", justifyContent: "space-evenly" }}
       >
         {items ? (
           items.map((item) => <CollectionItem key={item.id} item={item} />)
