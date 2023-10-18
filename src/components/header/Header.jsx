@@ -47,9 +47,11 @@ function NavBar({ direction }) {
       <Link component={RouterLink} to={"/shop"} sx={styles}>
         Shop
       </Link>
-      <Link component={RouterLink} to={"/payments"} sx={styles}>
-        Payment History
-      </Link>
+      {currentUser !== null && (
+        <Link component={RouterLink} to={"/payments"} sx={styles}>
+          Payment History
+        </Link>
+      )}
       <Box
         onClick={() => {
           if (currentUser) dispatch(signOutStart());

@@ -39,6 +39,7 @@ function Payments() {
       }
     }
     if (currentUser !== null) getPaymentHistory();
+    else setLoading(false);
   }, [currentUser]);
 
   return (
